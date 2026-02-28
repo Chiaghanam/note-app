@@ -208,3 +208,8 @@ __marimo__/
 
 staticfiles/
 frontend/dist/
+
+node_modules/
+staticfiles/
+react-note-app/dist/
+react-note-app/node_modules/
