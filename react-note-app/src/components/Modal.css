@@ -1,0 +1,33 @@
+.c-modal-overlay{
+    position: fixed;
+    top: 0;
+    width: 99.9vw;
+    height: 99.9vh;
+    background-color: rgb(220, 220, 220, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* opacity: 70%; */
+    display: flex;
+}
+
+.c-modal{
+    background-color: white;
+    width: 28rem;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    border-radius: 8px;
+    position: relative;
+    opacity: 100%;
+}
+.closebutton{
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    cursor: pointer;
+    
+}

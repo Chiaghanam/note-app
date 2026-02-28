@@ -1,0 +1,23 @@
+.note-container{
+    width: 100%;
+}
+@media screen and (max-width: 600px) {
+    .note-container{
+        margin-top: 6.5rem;
+    }
+}
+@media (min-width: 600px) and (max-width: 768px) {
+    .note-container{
+        margin-top: 5rem;
+    }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+    .note-container{
+        margin-top: 6rem;
+    }
+}
+@media screen and (min-width: 1200px)  {
+    .note-container{
+        margin-top: 7rem;
+    }
+}

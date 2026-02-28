@@ -1,0 +1,33 @@
+.Mainnote-container{
+    width: 55vw;
+    height: auto;
+    margin-top: 6rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+@media screen and (max-width: 768px){
+    .Mainnote-container{
+        width: 90vw;
+        padding: 1rem;
+        margin-top: 5rem;
+    }
+
+    .Mainnote-date{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* gap: 1rem; */
+}
+    
+}
+.Mainnote-date{
+    margin-top: 1rem;
+    display: flex;
+    gap: 3rem;
+}
