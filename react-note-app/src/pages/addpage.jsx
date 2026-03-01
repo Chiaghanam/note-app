@@ -9,7 +9,7 @@ const AddPage = () => {
 
   const onSubmit = async data => {
     try {
-      const response = await api.post('http://127.0.0.1:8000/note_list/', data)
+      const response = await api.post('/note_list/', data)
       console.log('success', response.data); 
       reset();
       navigate('/');

@@ -21,7 +21,7 @@ const Mainnote = () => {
   useEffect(() => {
 if (id){console.log(id);} 
 
-    api.get(`http://127.0.0.1:8000/note_edit/${numericId}`)
+    api.get(`/note_edit/${numericId}`)
       .then(response => {
         console.log(response.data);
         setNote(response.data);
@@ -32,7 +32,7 @@ if (id){console.log(id);}
   },[numericId]);
  
   const handledelete = () =>{
-    api.delete(`http://127.0.0.1:8000/note_edit/${numericId}/`)
+    api.delete(`/note_edit/${numericId}/`)
     .then(() => {
       console.log("note deleted successfully");
       Navigate("/");
