@@ -21,7 +21,7 @@ const Mainnote = () => {
   useEffect(() => {
 if (id){console.log(id);} 
 
-    api.get(`/note_edit/${numericId}`)
+    api.get(`/note_edit/${numericId}/`)
       .then(response => {
         console.log(response.data);
         setNote(response.data);
