@@ -2,7 +2,7 @@ import React from 'react'
 import './Mainnote.css'
 import Navbar from '../components/Navbar'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
 import Modal from '../components/Modal'
@@ -21,7 +21,7 @@ const Mainnote = () => {
   useEffect(() => {
 if (id){console.log(id);} 
 
-    axios.get(`http://127.0.0.1:8000/note_edit/${numericId}`)
+    api.get(`http://127.0.0.1:8000/note_edit/${numericId}`)
       .then(response => {
         console.log(response.data);
         setNote(response.data);
@@ -32,7 +32,7 @@ if (id){console.log(id);}
   },[numericId]);
  
   const handledelete = () =>{
-    axios.delete(`http://127.0.0.1:8000/note_edit/${numericId}/`)
+    api.delete(`http://127.0.0.1:8000/note_edit/${numericId}/`)
     .then(() => {
       console.log("note deleted successfully");
       Navigate("/");

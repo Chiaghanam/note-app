@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // import Noteform from '../components/Noteform'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
+import api from '../api'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
@@ -26,7 +26,7 @@ const { register, handleSubmit, reset } = useForm({
   useEffect ( ()  => {
     const fetchData = () => {
       try{
-        const response = axios.get(`http://127.0.0.1:8000/note_edit/${id}/`)
+        const response = api.get(`http://127.0.0.1:8000/note_edit/${id}/`)
           .then(response => {
           console.log("gotten responce")
           console.log(response.data)
@@ -51,7 +51,7 @@ const { register, handleSubmit, reset } = useForm({
   const onsubmit = async (data) => {
 
     try{
-       const response = await axios.put(`http://127.0.0.1:8000/note_edit/${id}/`, data);
+       const response = await api.put(`http://127.0.0.1:8000/note_edit/${id}/`, data);
         console.log('success' , response.data);
         alert("note updated successfully");
       } catch (error) {

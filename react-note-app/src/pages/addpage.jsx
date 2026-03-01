@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios'
+import api from '../api'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ const AddPage = () => {
 
   const onSubmit = async data => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/note_list/', data)
+      const response = await api.post('http://127.0.0.1:8000/note_list/', data)
       console.log('success', response.data); 
       reset();
       navigate('/');
