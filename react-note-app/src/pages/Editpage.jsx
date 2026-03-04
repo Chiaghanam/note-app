@@ -1,102 +1,107 @@
-import React, { useEffect, useState } from 'react'
-// import Noteform from '../components/Noteform'
-import { useForm } from 'react-hook-form'
-import api from '../api'
-import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import api from '../api';
+import { useParams, useNavigate } from 'react-router-dom';
 
+const Editpage = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const Editpage =  () => {
-  const [loading, setloading] = useState(true);
-  const [error, seterror] = useState(null);
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      title: '',
+      content: '',
+      catigory: ''
+    }
+  });
 
-  // const [title, settitle] = useState('')
-  // const [content, setcontent] = useState('')
-  // const [category, setcategory] = useState('')
-  
-const { register, handleSubmit, reset } = useForm({
-  defaultValues: {
-    title: '',
-    content: '',
-    category: ''
-  }
-});
   const navigate = useNavigate();
   const { id } = useParams();
-  useEffect ( ()  => {
-    const fetchData = () => {
-      try{
-        const response = api.get(`/note_edit/${id}/`)
-          .then(response => {
-          console.log("gotten responce")
-          console.log(response.data)
-          reset({
-            title: response.data.title,
-            content: response.data.content,
-            category: response.data.category
-          });
-          })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`/note_edit/${id}/`);
+        reset({
+          title: response.data.title,
+          content: response.data.content,
+          category: response.data.category
+        });
       } catch (error) {
-        console.error("error fetching note", error);
-        seterror('Failed to fetch note data');
-      }finally{
-        setloading(false);
+        console.error("Error fetching note", error);
+        setError('Failed to fetch note data');
+      } finally {
+        setLoading(false);
       }
     };
-    
-      fetchData();
-    
-    
-  }, [id])
-  const onsubmit = async (data) => {
 
-    try{
-       const response = await api.put(`/note_edit/${id}/`, data);
-        console.log('success' , response.data);
-        alert("note updated successfully");
-      } catch (error) {
-         console.error("error updating note", error);
-         seterror("failed to update note");
-      }
-     
+    fetchData();
+  }, [id, reset]);
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await api.put(`/note_edit/${id}/`, data);
+      console.log('success', response.data);
+      alert("Note updated successfully");
       reset();
       navigate(`/note/${id}`);
+    } catch (error) {
+      console.error("Error updating note", error);
+      setError("Failed to update note");
     }
+  };
 
-    if (loading){
-      return <div> Loading note...</div>
-    }
-    if (error){
-      return <div> Error: {error}
-      </div>
-    }
+  if (loading) {
+    return <div className="text-center mt-5">Loading note...</div>;
+  }
+
+  if (error) {
+    return <div className="alert alert-danger mt-5 text-center">Error: {error}</div>;
+  }
+
   return (
-    <div className='container'>
-        
-        <div className='d-flex justify-content-center align-items-center' style={{width: '99vw'}}>
-            <div>
-                <h1 className='mb-4'>Edit Note</h1>
-                  <form  onSubmit={handleSubmit(onsubmit)} className='container' style={{backgroundColor: '#bfbbbbff', opacity: '0.8', borderRadius: '8px', width: '50vw', justifySelf: 'center', alignSelf: 'center', display: 'flex', flexDirection: 'column', gap: '10px'}}>
-                   <input type="text" placeholder='Title...' name="title" id=""  {...register('title')} className='form-control mt-3' />
+    <div className="container my-5 mt-5">
+      <div className="row justify-content-center">
+        <div className="col-12 col-md-8 col-lg-6">
+          <h1 className="mb-4 text-center mt-5">Edit Note</h1>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="p-4 bg-light rounded shadow-sm d-flex flex-column gap-3"
+          >
+            <input
+              type="text"
+              placeholder="Title..."
+              {...register('title')}
+              className="form-control"
+            />
 
-                    <textarea name="content" placeholder='Content...' id=""  {...register('content')} className='form-control' style={{maxHeight: '100px', overflow: 'auto'}}></textarea>
+            <textarea
+              placeholder="Content..."
+              {...register('content')}
+              className="form-control"
+              rows={4}
+            ></textarea>
 
-                    <select className='form-select' {...register('catigory', { required: true })} >
-                              <option value="">Select Category</option>
-                              <option value="Business">Business</option>    
-                              <option value="Personal">Personal</option>
-                              <option value="Important">Important</option>
-                    </select>
+            <select
+              className="form-select"
+              {...register('catigory', { required: true })} 
+            >
+              <option value="">Select Category</option>
+              <option value="Business">Business</option>
+              <option value="Personal">Personal</option>
+              <option value="Important">Important</option>
+            </select>
 
-    
-                    <button type="submit"  className='btn btn-success mb-3'> Update Note</button>
-                  </form>
+            <div className="d-grid">
+              <button type="submit" className="btn btn-success">
+                Update Note
+              </button>
             </div>
-            
+          </form>
         </div>
-    
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Editpage
+export default Editpage;
